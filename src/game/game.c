@@ -4,7 +4,7 @@
 #include "device/timer.h"
 
 #define FPS 30
-#define CHARACTER_PER_SECOND 5
+#define FOOD_PER_SECOND 1
 #define UPDATE_PER_SECOND 100
 
 volatile int tick = 0;
@@ -65,12 +65,12 @@ main_loop(void) {
 		 * 期间错过的每一帧游戏逻辑。 */
 		while (now < target) { 
 			/* 每隔一定时间产生一个新的字符 */
-			if (now % (HZ / CHARACTER_PER_SECOND) == 0) {
-				create_new_letter();
-			} 
+			/*if (now % (HZ / FOOD_PER_SECOND) == 0) {
+				create_new_food();
+			} */
 			/* 每隔一定时间更新屏幕上字符的位置 */
 			if (now % (HZ / UPDATE_PER_SECOND) == 0) {
-				update_letter_pos();
+				update_pos();
 			}
 			/* 每隔一定时间需要刷新屏幕。注意到这里实现了“跳帧”的机制：假设
 			 *   HZ = 1000, FPS = 100, now = 10, target = 1000
