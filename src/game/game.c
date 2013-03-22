@@ -4,8 +4,8 @@
 #include "device/timer.h"
 
 #define FPS 30
-#define FOOD_PER_SECOND 1
-#define UPDATE_PER_SECOND 100
+#define CHARACTER_PER_SECOND 5
+#define UPDATE_PER_SECOND 2
 
 volatile int tick = 0;
 
@@ -65,8 +65,8 @@ main_loop(void) {
 		 * 期间错过的每一帧游戏逻辑。 */
 		while (now < target) { 
 			/* 每隔一定时间产生一个新的字符 */
-			/*if (now % (HZ / FOOD_PER_SECOND) == 0) {
-				create_new_food();
+			/*if (now % (HZ / CHARACTER_PER_SECOND) == 0) {
+				create_new_letter();
 			} */
 			/* 每隔一定时间更新屏幕上字符的位置 */
 			if (now % (HZ / UPDATE_PER_SECOND) == 0) {

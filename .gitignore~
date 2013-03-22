@@ -1,4 +1,5 @@
 *.d
 *.o
 *.img
+/game
 boot/bootblock

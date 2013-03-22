@@ -11,22 +11,23 @@
 void
 redraw_screen() {
 	body_t it;
-	//const char *hit, *miss;
+	food_t food_temp;
+	int i=0;
 	
 	prepare_buffer(); /* 准备缓冲区 */
 
 	/* 绘制每个字符 */
-	for (it = characters(); it != NULL; it = it->_next) {
-		static char * buf = "■";
-		draw_string(buf, it->x, it->y, 15);
+	for (it = snakebody(); it != NULL; it = it->_next,i++) {
+		if(i==0) draw_string("@", it->r_x, it->r_y, 13);
+		else draw_string("O", it->r_x, it->r_y, 15);
 	}
 
-	/* 绘制命中数、miss数、最后一次按键扫描码和fps */
-	/*draw_string(itoa(last_key_code()), SCR_HEIGHT - 8, 0, 48);
-	hit = itoa(get_hit());
-	draw_string(hit, 0, SCR_WIDTH - strlen(hit) * 8, 10);
-	miss = itoa(get_miss());
-	draw_string(miss, SCR_HEIGHT - 8, SCR_WIDTH - strlen(miss) * 8, 12);*/
+	draw_string(itoa(i), 0, 200, 15);
+	draw_string("Body length:", 0, strlen("Body length:") * 8, 15);
+
+	food_temp = getfood();
+	if(food_temp!=NULL) draw_string("*", food_temp->x, food_temp->y, 10);
+
 	draw_string(itoa(get_fps()), 0, 0, 14);
 	draw_string("FPS", 0, strlen(itoa(get_fps())) * 8, 14);
 
